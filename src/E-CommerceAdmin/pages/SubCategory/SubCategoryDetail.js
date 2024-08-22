@@ -1,28 +1,31 @@
 /** @format */
 import React, { useEffect, useState } from "react";
-import HOC from "../../layout/HOC";
+import HOC from "../../layout/HOC.jsx";
 import { Table, Modal, Form, Button, Alert } from "react-bootstrap";
 import { Dropdown, Menu } from "antd";
-import BreadCamp from "../Component/BreadCamp";
+import BreadCamp from "../Component/BreadCamp.js";
 import axios from "axios";
-import BaseUrl from "../../../BaseUrl";
+import BaseUrl from "../../../BaseUrl.jsx";
 import { nofification } from "../../utils/utils.js";
 import { FaFilePdf } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ESubCategory = () => {
-  const navigate = useNavigate();
+  const {id} = useParams()
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState("");
   const [data, setData] = useState([]);
-  const [id, setId] = useState("");
+  const [currentStatus,setCurrentStatus]=useState("")
+
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl()}api/career/get-all-application`
+        `${BaseUrl()}api/career/applications/${id}/status-history`
       );
-      setData(data?.data);
+      setCurrentStatus(data?.data?.currentStatus)
+      setData(data?.data?.history);
+      
     } catch (e) {
       console.log(e);
     }
@@ -32,17 +35,7 @@ const ESubCategory = () => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id) => {
-    try {
-      const { data } = await axios.delete(
-        `${BaseUrl()}api/career/delete-application/${id}`
-      );
-      nofification("Application Deleted Successfully", "success");
-      fetchData();
-    } catch (e) {
-      console.log(e);
-    }
-  };
+ 
 
   // Pagination and Filter
   const [query, setQuery] = useState("");
@@ -56,12 +49,11 @@ const ESubCategory = () => {
   const TotolData = query
     ? data?.filter((i) =>
         [
-          `${i?.firstName} ${i?.lastName}`,
-          i?.email,
-          i?.phone,
-          i?.jobId,
-          i?.location,
-          i?.jobTitle,
+        
+          i?.status,
+          i?.message,
+          i?.date.slice(0, 10),
+         
         ].some((field) => field?.toLowerCase().includes(query?.toLowerCase()))
       )
     : data;
@@ -212,18 +204,16 @@ const ESubCategory = () => {
                 />
               </div>
 
+              <h5 style={{fontWeight:"bold"}}>Apllicants Status :  {currentStatus.toUpperCase()}</h5>
+
               <div className="overFlowCont">
                 <Table>
                   <thead>
                     <tr>
                       <th>SNo.</th>
-                      <th>Full Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Job Id</th>
-                      <th>Location</th>
-                      <th>Job Title</th>
-                      <th>cv_file</th>
+                      <th>Status</th>
+                      <th>Message</th>
+                      <th>Date</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -231,63 +221,9 @@ const ESubCategory = () => {
                     {slicedData?.map((i, index) => (
                       <tr key={index}>
                         <td>#{index + 1} </td>
-                        <td>{`${i.firstName} ${i.lastName}`} </td>
-                        <td> {i?.email} </td>
-                        <td> {i?.phone} </td>
-                        <td> {i?.jobId} </td>
-                        <td> {i?.location} </td>
-                        <td> {i?.jobTitle} </td>
-                        <td>
-                          <a
-                            href={`https://ashpro-backend.onrender.com/${i?.cv_file}`}
-                            target="_blank"
-                          >
-                            <FaFilePdf size={25} />
-                          </a>
-                        </td>
-                        <td>
-                          <Dropdown
-                            overlay={
-                              <Menu>
-                                 <Menu.Item key="1">
-                                  <div
-                                    className="two_Sec_Div"
-                                    onClick={() => {
-                                      navigate(`/application/${i?._id}`);
-                                    }}
-                                  >
-                                    <i className="fa-solid fa-eye"></i>
-                                    <p>View Info</p>
-                                  </div>
-                                </Menu.Item>
-                                <Menu.Item key="2">
-                                  <div
-                                    className="two_Sec_Div"
-                                    onClick={() => {
-                                      setId(i?._id);
-                                      setEdit(true);
-                                      setModalShow(true);
-                                    }}
-                                  >
-                                    <i className="fa-solid fa-pen-to-square"></i>
-                                    <p>Send Mail</p>
-                                  </div>
-                                </Menu.Item>
-                                <Menu.Item key="3">
-                                  <div className="two_Sec_Div">
-                                    <i className="fa-sharp fa-solid fa-trash"></i>
-                                    <p onClick={() => handleDelete(i._id)}>
-                                      Delete{" "}
-                                    </p>
-                                  </div>
-                                </Menu.Item>
-                              </Menu>
-                            }
-                            trigger={["click"]}
-                          >
-                            <i className="fa-solid fa-ellipsis-vertical"></i>
-                          </Dropdown>
-                        </td>
+                        <td>{`${i?.status}`} </td>
+                        <td> {i?.message} </td>
+                        <td> {i?.date?.slice(0, 10)} </td>
                       </tr>
                     ))}
                   </tbody>

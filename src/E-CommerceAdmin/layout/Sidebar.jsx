@@ -21,79 +21,80 @@ const Sidebar = ({ hamb, setHamb }) => {
       icon: (
         <i className="fa-solid fa-user text-xl mr-3 rounded-full"></i>
       ),
-      link: "/Customer",
-      name: "Customers",
+      link: "/candidate",
+      name: "candidate",
     },
     {
       icon: <i className="fa-solid fa-user-tie text-xl mr-3 rounded-full"></i>,
-      link: "/VendorList",
+      link: "/admin",
       name: "Admin",
     },
     {
       icon: (
     <i className="fa-solid fa-box text-xl mr-3 rounded-full"></i>
       ),
-      link: "/Product",
+      link: "/job",
       name: "Jobs",
     },
     {
       icon: <i className=" fa-brands fa-slack text-2xl mr-3"></i>,
-      link: "/Category",
+      link: "/blogs",
       name: "Blog",
     },
 
     {
-      icon: <i className=" fa-solid fa-layer-group text-xl mr-3 rounded-full " />,
-      link: "/SubCategory",
-      name: "Sub-Category",
+      icon: <i className=" fa-solid fa-layer-group text-xl mr-3 rounded-full" />,
+      link: "/application",
+      name: "Application",
     },
-    {
-      icon: <i className="fa-solid fa-envelope text-xl mr-3 rounded-full"></i>,
-      link: "/pushNotification",
-      name: "Push Notification",
-    },
-
-    {
-      icon: <i className="fa-solid fa-image   text-xl mr-3 rounded-full " />,
-      link: "/banner",
-      name: "Banner",
-    },
-    {
-      icon: <i className=" fa-solid fa-ticket text-xl mr-3 rounded-full " />,
-      link: "/coupon",
-      name: "Coupon",
-    },
-
-    {
-      icon: (
-        <i className="fa-solid fa-cart-shopping text-xl mr-3 rounded-full"></i>
-      ),
-      link: "/Orders",
-      name: "Orders",
-    },
-   
-    {
+     {
       icon: <i className="fa-solid fa-phone  text-xl mr-3 rounded-full"></i>,
       link: "/Support",
       name: "Help & Suppport",
     },
+    // {
+    //   icon: <i className="fa-solid fa-envelope text-xl mr-3 rounded-full"></i>,
+    //   link: "/pushNotification",
+    //   name: "Push Notification",
+    // },
+
+    // {
+    //   icon: <i className="fa-solid fa-image   text-xl mr-3 rounded-full " />,
+    //   link: "/banner",
+    //   name: "Banner",
+    // },
+    // {
+    //   icon: <i className=" fa-solid fa-ticket text-xl mr-3 rounded-full " />,
+    //   link: "/coupon",
+    //   name: "Coupon",
+    // },
+
+    // {
+    //   icon: (
+    //     <i className="fa-solid fa-cart-shopping text-xl mr-3 rounded-full"></i>
+    //   ),
+    //   link: "/Orders",
+    //   name: "Orders",
+    // },
+   
+   
  
 
-    {
-      icon: <i className="fa-solid fa-shield text-xl mr-3 rounded-full"></i>,
-      link: "/privacy",
-      name: "Privacy Policy",
-    },
-    {
-      icon: <i className="fa-solid fa-barcode text-xl mr-3 rounded-full"></i>,
-      link: "/terms",
-      name: "Terms&Condition",
-    },
-    {
-      icon: <i className="fa-solid fa-phone  text-xl mr-3 rounded-full"></i>,
-      link: "/customerquery",
-      name: "Customer&Query",
-    }
+    // {
+    //   icon: <i className="fa-solid fa-shield text-xl mr-3 rounded-full"></i>,
+    //   link: "/privacy",
+    //   name: "Privacy Policy",
+    // },
+    // {
+    //   icon: <i className="fa-solid fa-barcode text-xl mr-3 rounded-full"></i>,
+    //   link: "/terms",
+    //   name: "Terms&Condition",
+    // },
+    // {
+    //   icon: <i className="fa-solid fa-phone  text-xl mr-3 rounded-full"></i>,
+    //   link: "/customerquery",
+    //   name: "Customer&Query",
+    // }
   ];
 
   const logOut = () => {

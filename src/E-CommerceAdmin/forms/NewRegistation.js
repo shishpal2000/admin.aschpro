@@ -6,50 +6,60 @@ import { AiOutlineMail } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { Alert } from "react-bootstrap";
-import { Store } from 'react-notifications-component';
+
 import axios from "axios";
 import BaseUrl from "../../BaseUrl";
+import { nofification } from "../utils/utils";
 
-
-const Login = () => {
+const NewRegistation = () => {
   const [pass, setPass] = useState(false);
   const [inputpass, setInputpass] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [email,setEmail] =useState("");
-  const [password,setPassword]=useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
 
-  const data={
-    email:email,
-    password:password
-
-  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    let url = `${BaseUrl()}api/auth/login`;
-   
+    let url = `${BaseUrl()}api/auth/register`;
+
+    const data = {
+      email: email,
+      password: password,
+    };
 
     try {
-      const res = await axios.post(url, data);
-      localStorage.setItem("token", res.data.data.token);
-      navigate("/dashboard");
-      Store.addNotification({
-        title: "Login Success",
-        message: "Welcome Admin",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 2000,
-          onScreen: true
-        }
-      });
+        const res = await axios.post(url, data);
+        setShowOtp(true);
+        nofification("Otp send successfully", "success");
+        setLoading(false);
+    } catch (err) {
+      console.log("Admin Login err => ", err);
       setLoading(false);
+      setError(true);
+    }
+  };
+
+  const handleOtp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    let url = `${BaseUrl()}api/auth/verify-opt`;
+
+    const data = {
+      email: email,
+      otp: otp,
+    };
+    
+    try {
+        const res = await axios.post(url, data);
+        nofification("Register successfully", "success");
+        setLoading(false);
+        navigate("/");
     } catch (err) {
       console.log("Admin Login err => ", err);
       setLoading(false);
@@ -68,20 +78,20 @@ const Login = () => {
           <section className="py-2">
             {error ? (
               <div className="dangerBox">
-                <Alert variant="danger">Check Your Credentials</Alert>
+                <Alert variant="danger">Check Your Detail</Alert>
                 <i class="fa-solid fa-x" onClick={() => setError(false)}></i>
               </div>
             ) : (
               ""
             )}
-
-            <div className="shadow-2xl sm:w-96 border border-[rgb(241,146,46)] space-x-4 flex items-center w-[100%]   p-2 rounded-md">
+          
+            <div className="shadow-2xl sm:w-96 border border-[rgb(241,146,46)] space-x-4 flex items-center w-[100%]   p-2 rounded-md mt-3">
               <input
                 type="email"
                 placeholder="admin@gmail.com"
                 required
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="outline-none px-0.5  bg-transparent tracking-wider w-full"
               />
               <AiOutlineMail className="text-xl " />
@@ -92,7 +102,7 @@ const Login = () => {
                 placeholder="password"
                 name="password"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="outline-none px-0.5  bg-transparent tracking-wider w-full  "
               />
@@ -108,24 +118,40 @@ const Login = () => {
               </span>
             </div>
 
+            {showOtp && (
+              <div className="shadow-2xl sm:w-96 border border-[rgb(241,146,46)] space-x-4 flex items-center w-[100%]   p-2 rounded-md mt-3">
+                <input
+                  type="type"
+                  placeholder="Enter your Otp"
+                  required
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="outline-none px-0.5  bg-transparent tracking-wider w-full"
+                />
+                <AiOutlineMail className="text-xl " />
+              </div>
+            )}
+
             <button
               type="submit"
               className="EcommerceAdminLogin"
-              onClick={submitHandler}
+              onClick={showOtp ? handleOtp : submitHandler}
             >
               {loading ? (
                 <Oval height={30} secondaryColor="black" color="black" />
+              ) : showOtp ? (
+                "Verify Otp"
               ) : (
-                "LOG IN"
+                "Register"
               )}
             </button>
             <br />
             <button
               type="button"
-              onClick={() => navigate("/newRegistation")}
+              onClick={() => navigate("/")}
               className="EcommerceVendorLogin"
             >
-              New Registation
+              Login
             </button>
           </section>
         </form>
@@ -134,4 +160,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default NewRegistation;

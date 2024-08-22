@@ -20,6 +20,9 @@ import SellerProducts from "./E-CommerceAdmin/pages/Seller/SellerProducts";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import CustomerQuery from "./E-CommerceAdmin/pages/CustomerQueary/CustomerQuery";
+import ViewJobs from "./E-CommerceAdmin/pages/Category/ViewJobs";
+import NewRegistation from "./E-CommerceAdmin/forms/NewRegistation";
+import SubCategoryDetail from "./E-CommerceAdmin/pages/SubCategory/SubCategoryDetail";
 
 function App() {
   return (
@@ -27,22 +30,27 @@ function App() {
       <ReactNotifications />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/newRegistation" element={<NewRegistation />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/Customer" element={<EAdminCustomer />} />
-        <Route path="/VendorList" element={<EVendorList />} />
-        <Route path="/Product" element={<EProduct />} />
+        <Route path="/candidate" element={<EAdminCustomer />} />
+        <Route path="/admin" element={<EVendorList />} />
+        <Route path="/job" element={<EProduct />} />
         <Route path="/product/:id" element={<ViewProduct />} />
-        <Route path="/Category" element={<ECategory />} />
-        <Route path="/SubCategory" element={<ESubCategory />} />
+        <Route path="/blogs" element={<ECategory />} />
+        <Route path="/viewjobs/:id" element={<ViewJobs />} />
+        <Route path="/application" element={<ESubCategory />} />
+        <Route path="/application/:id" element={<SubCategoryDetail />} />
+        <Route path="/Support" element={<EAdminDelivery />} />
+
+        {/* 
         <Route path="/pushNotification" element={<PushNotification />} />
         <Route path="/banner" element={<Banners />} />  
         <Route path="/coupon" element={<Coupon />} />
-        <Route path="/Support" element={<EAdminDelivery />} />
         <Route path="/Orders" element={<EAdminOrders />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/seller/product/:name" element={<SellerProducts />} />
-        <Route path="/customerquery" element={<CustomerQuery />} />
+        <Route path="/customerquery" element={<CustomerQuery />} /> */}
         
         
       </Routes>

@@ -8,14 +8,15 @@ import { useState } from "react";
 import { useEffect } from "react";
 import BaseUrl from "../../../BaseUrl";
 import axios from "axios";
-const ViewProduct = () => {
+const ViewJobs = () => {
+
   const { id } = useParams();
 
   //api calling
   const [product, setProduct] = useState({});
   const getProducts = async () => {
-    console.log("ls", localStorage.getItem("boon"));
-    let url = `${BaseUrl()}api/jobs/get-job/${id}`;
+
+    let url = `${BaseUrl()}api/blogs/get-blog/${id}`;
     try {
       const res = await axios.get(url, {
         headers: {
@@ -42,32 +43,47 @@ const ViewProduct = () => {
       <section className="sectionCont">
         <div className="Detail_Section">
           <div className="right_Cont">
-            <p className="Head">Job Id : {product?.jobId}</p>
+            <div className="blog-image">
+              <img src={`https://ashpro-backend.onrender.com/${product?.blog_image}`} alt="imgae not found" />
+            </div>
             <p className="Rating">
-              <span className="rat">Role : {product?.role}</span>{" "}
+              {/* <span className="rat">Role : {product.role}</span>{" "} */}
             </p>
 
-            <p className="Rating rat">
-              <span className="rat">Location : {product?.location}</span>{" "}
-            </p>
+            <div className="flex-job">
+              <p className="Head">General Title :</p>
 
-            <div>
-              <h4 className="Head">Job Responsibilities :</h4>
+              <p>{
+                product?.title
+              }</p>
 
-              <ul>
-                <li>{product?.job_description?.keyResponsibilities}</li>
-              </ul>
-            
-            </div>
+           
+             
+              </div>
 
-            <div>
-              <h4 className="Head">Job Requirements :</h4>
+              <div className="flex-job">
+              <p className="Head">General Description :</p>
 
-              <ul>
-                <li>{product?.job_description?.keyRequirements}</li>
-              </ul>
-            
-            </div>
+              <p>{
+                product?.content
+              }</p>
+
+           
+             
+              </div>
+
+              <div className="flex-job">
+              <p className="Head">Time :</p>
+
+              <p>{
+                product?.updatedAt?.slice(0, 10)
+              }</p>
+
+           
+             
+              </div>
+
+           
           </div>
         </div>
       </section>
@@ -75,4 +91,4 @@ const ViewProduct = () => {
   );
 };
 
-export default HOC(ViewProduct);
+export default HOC(ViewJobs);

@@ -536,8 +536,32 @@ html {
 }
 
 
-.flex-job{
+.flex-job {
   display: flex;
   gap: 2rem;
   width: 100%;
+}
+
+.flex-job > :first-child {
+  width: 30%;
+}
+
+.flex-job > :nth-child(2) {
+  width: 70%;
+}
+
+.image-preview{
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.blog-image{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

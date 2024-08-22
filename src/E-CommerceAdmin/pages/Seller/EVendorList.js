@@ -90,7 +90,7 @@ const EVendorList = () => {
 
   return (
     <>
-      <BreadCamp name="Seller's" />
+      <BreadCamp name="Admin" />
       <div
         className="pb-4  w-full flex justify-between items-center"
         style={{ width: "98%", marginLeft: "2%" }}
@@ -145,31 +145,7 @@ const EVendorList = () => {
                    
                       <td> Admin </td>
 
-                      {/* <td>
-                        <Dropdown
-                          overlay={
-                            <Menu>
-                              <Menu.Item key="2">
-                                <div className="two_Sec_Div">
-                                  <i className="fa-solid fa-eye"></i>
-                                  <Link to={`/seller/product/${i.fullName}`}>
-                                    <p>View Admin</p>
-                                  </Link>
-                                </div>
-                              </Menu.Item>
-                              <Menu.Item key="3">
-                                <div className="two_Sec_Div">
-                                  <i className="fa-sharp fa-solid fa-trash"></i>
-                                  <p onClick={()=>handleDelete(i._id)}>Delete</p>
-                                </div>
-                              </Menu.Item>
-                            </Menu>
-                          }
-                          trigger={["click"]}
-                        >
-                          <i className="fa-solid fa-ellipsis-vertical"></i>
-                        </Dropdown>
-                      </td> */}
+                   
                     </tr>
                   ))}
                 </tbody>

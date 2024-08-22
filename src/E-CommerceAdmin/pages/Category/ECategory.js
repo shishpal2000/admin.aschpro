@@ -7,15 +7,22 @@ import { Dropdown, Menu } from "antd";
 import BreadCamp from "../Component/BreadCamp";
 import axios from "axios";
 import BaseUrl from "../../../BaseUrl";
+import { nofification } from "../../utils/utils.js";
+import { useNavigate } from "react-router-dom";
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+
 
 const ECategory = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState("");
+  const [editData, setEditData] = useState({});
+
+  const navigate= useNavigate();
 
   //api calling
   const [data, setData] = useState([]);
   const getProducts = async () => {
-  
     let url = `${BaseUrl()}api/blogs/get-all-blog`;
     try {
       const res = await axios.get(url, {
@@ -34,16 +41,16 @@ const ECategory = () => {
     getProducts();
   }, []);
 
-  //delete 
-  const handleDelete=async(id)=>{
+  //delete
+  const handleDelete = async (id) => {
     try {
-      const res=await axios.delete(`${BaseUrl()}api/blogs/delete-blog/${id}`);
+      const res = await axios.delete(`${BaseUrl()}api/blogs/delete-blog/${id}`);
       getProducts();
-      window.alert("delete category")
+      nofification("Blogs Deleted Successfully", "danger");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // Pagination and Filter
   const [query, setQuery] = useState("");
@@ -55,14 +62,18 @@ const ECategory = () => {
   let pages2 = [];
 
   const TotolData = query
-    ? data?.filter((i) => i?.name?.toLowerCase().includes(query?.toLowerCase()))
-    : data;
+  ? data?.filter((i) =>
+      i?.title?.toLowerCase().includes(query?.toLowerCase()) ||
+      i?.content?.toLowerCase().includes(query?.toLowerCase()) ||
+      i?.createdAt?.slice(0, 10)?.toLowerCase().includes(query?.toLowerCase())
+    )
+  : data;
 
-  useEffect(() => {
-    if (query) {
-      setCurrentPage2(1);
-    }
-  }, [query]);
+useEffect(() => {
+  if (query) {
+    setCurrentPage2(1);
+  }
+}, [query]);
 
   const slicedData = TotolData?.slice(firstPostIndex2, lastPostIndex2);
 
@@ -81,9 +92,66 @@ const ECategory = () => {
   }
 
   function MyVerticallyCenteredModal(props) {
-    const [title,setTitle]=useState("");
-    const [content,setContent]=useState("");
-    const [image,setImage]=useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [image, setImage] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
+    const [id, setId] = useState("");
+
+    useEffect(() => {
+      if (edit) {
+        setId(editData?._id);
+        setTitle(editData?.title);
+        setContent(editData?.content);
+        setImage(editData?.blog_image);
+        setImagePreview(`https://ashpro-backend.onrender.com/${editData?.blog_image}`);
+      }
+    }, [edit, editData]);
+
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setImage(file);
+        setImagePreview(URL.createObjectURL(file));
+      }
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("blog_image", image);
+      axios
+        .post(`${BaseUrl()}api/blogs/create-blog?`, formData)
+        .then((res) => {
+          getProducts();
+          nofification("Blogs Added Successfully", "success");
+          props.onHide();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const handleEdit = (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("blog_image", image);
+      axios
+        .put(`${BaseUrl()}api/blogs/update-blog/${id}`, formData)
+        .then((res) => {
+          getProducts();
+          nofification("Blogs Updated Successfully", "success");
+          props.onHide();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     return (
       <Modal
         {...props}
@@ -94,22 +162,50 @@ const ECategory = () => {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             {" "}
-            {edit ? "Edit Category" : " Add Category"}
+            {edit ? "Edit Blogs" : " Add Blogs"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Image</Form.Label>
-              <Form.Control type="file" onClick={(e) => setImage(e.target.files[0])} required />
-            </Form.Group>
+          <Form onSubmit={edit ? handleEdit : handleSubmit}>
+            <div>
+              <Form.Group className="mb-3">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleImageChange}
+                  {...(edit ? {} : { required: true })}
+                  
+                />
+              </Form.Group>
+              {imagePreview && (
+                <div className="image-preview">
+                  <img
+                    src={imagePreview}
+                    alt="Selected"
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </div>
+              )}
+            </div>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" required onClick={(e) => setTitle(e.target.value)}/>
+
+              <Form.Control
+                value={title}
+                type="text"
+                required
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Content</Form.Label>
-              <Form.Control type="text" required onClick={(e) => setContent(e.target.value)}/>
+              <Form.Control
+                type="text"
+                value={content}
+                required
+                onChange={(e) => setContent(e.target.value)}
+              />
             </Form.Group>
 
             <Button
@@ -136,7 +232,7 @@ const ECategory = () => {
       />
 
       <section>
-        <BreadCamp name="Category" />
+        <BreadCamp name="Blogs" />
         <div
           className="pb-4   w-full flex justify-between items-center"
           style={{ width: "98%", marginLeft: "2%" }}
@@ -145,7 +241,7 @@ const ECategory = () => {
             className="tracking-widest text-slate-900 font-semibold uppercase"
             style={{ fontSize: "1.5rem" }}
           >
-            All Category's ( Total : {data?.length} )
+            All Blogs's ( Total : {data?.length} )
           </span>
           <button
             onClick={() => {
@@ -154,13 +250,13 @@ const ECategory = () => {
             }}
             className="md:py-2 px-3 md:px-4 py-1 rounded-sm bg-[#19376d] text-white tracking-wider"
           >
-            Add Category
+            Add Blogs
           </button>
         </div>
 
         <section className="sectionCont">
           {data?.length === 0 || !data ? (
-            <Alert>Categories Not Found</Alert>
+            <Alert>Blogs Not Found</Alert>
           ) : (
             <>
               <div className="filterBox">
@@ -170,7 +266,7 @@ const ECategory = () => {
                 />
                 <input
                   type="search"
-                  placeholder="Search By Category Name"
+                  placeholder="Search By Blogs Title, Content"
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </div>
@@ -192,7 +288,11 @@ const ECategory = () => {
                       <tr key={index}>
                         <td>#{index + 1} </td>
                         <td>
-                          <img src={`https://ashpro-backend.onrender.com/${i?.blog_image}`} alt="" style={{ width: "100px" }} />
+                          <img
+                            src={`https://ashpro-backend.onrender.com/${i?.blog_image}`}
+                            alt=""
+                            style={{ width: "100px" }}
+                          />
                         </td>
                         <td>{i.title} </td>
                         <td> {i.content}</td>
@@ -203,12 +303,23 @@ const ECategory = () => {
                           <Dropdown
                             overlay={
                               <Menu>
+                                 <Menu.Item key="1">
+                                  <div
+                                    className="two_Sec_Div"
+                                    onClick={() => navigate(`/viewjobs/${i?._id}`)}
+                                  >
+                                  <i className="fa-solid fa-eye"></i>
+
+                                    <p>View Jobs </p>
+                                  </div>
+                                </Menu.Item>
                                 <Menu.Item key="2">
                                   <div
                                     className="two_Sec_Div"
                                     onClick={() => {
                                       setEdit(true);
                                       setModalShow(true);
+                                      setEditData(i);
                                     }}
                                   >
                                     <i className="fa-solid fa-pen-to-square"></i>
@@ -219,7 +330,9 @@ const ECategory = () => {
                                 <Menu.Item key="3">
                                   <div className="two_Sec_Div">
                                     <i className="fa-sharp fa-solid fa-trash"></i>
-                                    <p onClick={()=>handleDelete(i._id)}>Delete </p>
+                                    <p onClick={() => handleDelete(i?._id)}>
+                                      Delete{" "}
+                                    </p>
                                   </div>
                                 </Menu.Item>
                               </Menu>

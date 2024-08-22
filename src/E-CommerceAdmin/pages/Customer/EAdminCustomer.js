@@ -24,8 +24,7 @@ const EAdminCustomer = () => {
          },
        });
  
-       setData(res.data.data);
-       console.log("admin support data", res.data.data);
+       setData(res?.data?.data);
      } catch (error) {
        console.log(error);
      }
@@ -88,7 +87,7 @@ const EAdminCustomer = () => {
 
   return (
     <>
-      <BreadCamp name="Customers" />
+      <BreadCamp name="candidate" />
       <div
         className="pb-4 w-full flex justify-between items-center"
         style={{ width: "98%", marginLeft: "2%" }}
@@ -97,7 +96,7 @@ const EAdminCustomer = () => {
           className="tracking-widest text-slate-900 font-semibold uppercase "
           style={{ fontSize: "1.5rem" }}
         >
-          All Customers ( Total : {data?.length} )
+          All candidate ( Total : {data?.length} )
         </span>
       </div>
 
@@ -150,7 +149,7 @@ const EAdminCustomer = () => {
                               <Menu.Item key="3">
                                 <div className="two_Sec_Div">
                                   <i className="fa-sharp fa-solid fa-trash"></i>
-                                  <p handleDelete={handleDelete(i._id)}>Delete</p>
+                                  <p onClick={() => handleDelete(i?._id)}>Delete</p>
                                 </div>
                               </Menu.Item>
                             </Menu>
