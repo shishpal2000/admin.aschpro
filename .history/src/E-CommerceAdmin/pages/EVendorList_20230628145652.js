@@ -60,7 +60,7 @@ const EVendorList = () => {
       toast.success(data.message);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

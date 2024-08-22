@@ -30,7 +30,7 @@ const Login = () => {
       toast.success("Welcome Admin");
       setLoading(false);
     } catch (err) {
-      console.log("Admin Login err => ", err);
+      ("Admin Login err => ", err);
       setLoading(false);
       setError(true)
     }

@@ -339,11 +339,11 @@ const EProduct = () => {
       const { data } = await axios.delete(
         `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:8886/api/product/${id}`
       );
-      console.log(data);
+      (data);
       fetchData();
       toast.success("Product Deleted SuccessFully");
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -361,10 +361,10 @@ const EProduct = () => {
         "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:8886/api/product/add",
         fd
       );
-      console.log(data);
+      (data);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

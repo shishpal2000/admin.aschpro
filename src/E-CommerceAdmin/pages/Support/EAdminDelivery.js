@@ -24,7 +24,7 @@ const EAdminDelivery = () => {
       });
       setData(res?.data?.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -45,7 +45,7 @@ const EAdminDelivery = () => {
       nofification("Help & Support Deleted Successfully", "success");
       getProducts();
     } catch (e) {
-      console.log(e);
+      
     }
   };
 
@@ -71,7 +71,7 @@ const EAdminDelivery = () => {
         getProducts();
         setModalShow(false);
       } catch (error) {
-        console.log(error);
+        
       }
     };
 

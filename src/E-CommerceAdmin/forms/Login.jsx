@@ -51,7 +51,7 @@ const Login = () => {
       });
       setLoading(false);
     } catch (err) {
-      console.log("Admin Login err => ", err);
+      
       setLoading(false);
       setError(true);
     }

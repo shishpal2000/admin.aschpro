@@ -56,7 +56,7 @@ const Terms = () => {
       );
       setData(data.terms);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

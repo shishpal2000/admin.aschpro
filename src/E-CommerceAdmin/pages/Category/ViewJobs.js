@@ -25,7 +25,7 @@ const ViewJobs = () => {
       });
       setProduct(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

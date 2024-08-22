@@ -20,7 +20,7 @@ const Terms = () => {
   //api calling
   const [data, setData] = useState("");
   const getProducts = async () => {
-    console.log("ls", localStorage.getItem("token"));
+  
     let url = `${BaseUrl()}/api/v1/terms`;
     try {
       const res = await axios.get(url, {
@@ -29,9 +29,9 @@ const Terms = () => {
         },
       });
       setData(res.data.product);
-      console.log(res.datat);
+   
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -85,7 +85,7 @@ const Terms = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("ls", localStorage.getItem("token"));
+
       let url = `${BaseUrl()}api/v1/terms`;
       try {
         const res = await axios.post(
@@ -100,7 +100,7 @@ const Terms = () => {
           }
         );
       } catch (error) {
-        console.log(error);
+        
       }
     };
 

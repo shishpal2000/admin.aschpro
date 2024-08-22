@@ -12,7 +12,7 @@ const CustomerQuery = () => {
   //api calling
   const [data, setData] = useState([]);
   const getProducts = async() => {
-    console.log("ls data ",(localStorage.getItem("token")))
+    
     let url = `${BaseUrl()}api/v1/help`;
     try {
       const res = await axios.get(url, {
@@ -22,9 +22,9 @@ const CustomerQuery = () => {
       });
 
       setData(res.data.message);
-      console.log("admin support data",res.data.message)
+    
     } catch (error) {
-      console.log(error)
+ 
     }
   }
   
@@ -34,9 +34,9 @@ const CustomerQuery = () => {
   }, []);
 
   const handleDelete=async(id)=>{
-   console.log("customer id",id)
+   ("customer id",id)
 
-      console.log("ls data ",(localStorage.getItem("token")))
+      ("ls data ",(localStorage.getItem("token")))
       let url = `${BaseUrl()}api/v1/help/delete/${id}`;
       try {
         const res = await axios.delete(url, {
@@ -46,7 +46,7 @@ const CustomerQuery = () => {
         });
         getProducts()
       } catch (error) {
-        console.log(error)
+       
       }
   }
 

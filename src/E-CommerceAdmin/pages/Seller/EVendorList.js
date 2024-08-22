@@ -24,9 +24,9 @@ const EVendorList = () => {
       });
 
       setData(res.data.data);
-      console.log("admin support data", res.data.data);
+      
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -43,7 +43,7 @@ const EVendorList = () => {
         }
       })
     } catch (error) {
-      console.log(error)
+     
     }
   }
 

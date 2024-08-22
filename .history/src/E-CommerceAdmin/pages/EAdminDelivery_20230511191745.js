@@ -54,7 +54,7 @@ const EAdminDelivery = () => {
       );
       setData(data.result);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -78,12 +78,12 @@ const EAdminDelivery = () => {
             whatpapp,
           }
         );
-        console.log(data.message);
+        (data.message);
         fetchData();
         toast.success("Added");
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -142,11 +142,11 @@ const EAdminDelivery = () => {
       const { data } = await axios.delete(
         `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:8886/api/support/${id}`
       );
-      console.log(data);
+      (data);
       fetchData();
       toast.success("Deleted ");
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

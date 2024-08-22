@@ -15,7 +15,7 @@ const EAdminCustomer = () => {
   //  api calling
    const [data, setData] = useState();
    const getProducts = async () => {
-     console.log("ls data ", localStorage.getItem("token"));
+   
      let url = `${BaseUrl()}api/contact/get-all-mail`;
      try {
        const res = await axios.get(url, {
@@ -26,7 +26,7 @@ const EAdminCustomer = () => {
  
        setData(res?.data?.data);
      } catch (error) {
-       console.log(error);
+       
      }
    };
  
@@ -42,7 +42,7 @@ const EAdminCustomer = () => {
         }
       })
     } catch (error) {
-      console.log(error)
+
     }
   }
 

@@ -56,7 +56,7 @@ const Terms = () => {
       );
       setData(data.terms);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -79,7 +79,7 @@ const Terms = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 

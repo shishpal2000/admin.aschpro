@@ -54,7 +54,7 @@ const EAdminDelivery = () => {
       );
       setData(data.result);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -78,12 +78,12 @@ const EAdminDelivery = () => {
             whatpapp,
           }
         );
-        console.log(data.message);
+        (data.message);
         fetchData();
         toast.success("Added");
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 

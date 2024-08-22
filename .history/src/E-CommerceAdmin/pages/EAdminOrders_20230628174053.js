@@ -63,7 +63,7 @@ const EAdminOrders = () => {
       );
       setData(data.orders);
     } catch (e) {
-      console.log("Order Err=>", e);
+      ("Order Err=>", e);
     }
   };
 

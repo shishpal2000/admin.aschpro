@@ -32,7 +32,7 @@ const PushNotification = () => {
    //api calling
    const [data, setData] = useState([]);
    const getProducts = async() => {
-     console.log("ls",(localStorage.getItem("token")))
+
      let url = `${BaseUrl()}api/v1/notify`;
      try {
        const res = await axios.get(url, {
@@ -40,11 +40,11 @@ const PushNotification = () => {
            Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
        });
-       console.log("product from shoes section",res.data.message);
+
        setData(res.data.message);
-       console.log("admin product data",res.data.message)
+
      } catch (error) {
-       console.log(error)
+
      }
    }
    
@@ -105,7 +105,7 @@ const PushNotification = () => {
         getProducts();
         setModalShow();
       } catch (error) {
-        console.log(error)
+   
       }
     }
     return (
@@ -168,7 +168,7 @@ const PushNotification = () => {
           }
         })
       } catch (error) {
-        console.log(error)
+        
       }
     }
 

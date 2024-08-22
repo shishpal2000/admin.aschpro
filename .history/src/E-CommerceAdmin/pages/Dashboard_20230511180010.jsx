@@ -23,7 +23,7 @@ const Dashboard = () => {
       setUserCount(data.users?.filter((i) => i?.role.includes("user")));
      
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -34,7 +34,7 @@ const Dashboard = () => {
       );
       setCategoryCount(data.categories.length);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -45,7 +45,7 @@ const Dashboard = () => {
       );
       setProductCount(data.stats.ProducData.length);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -56,7 +56,7 @@ const Dashboard = () => {
       );
       setOrderCount(data.orders.length);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

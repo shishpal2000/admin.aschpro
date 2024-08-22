@@ -33,7 +33,7 @@ const PrivacyPolicy = () => {
   //api calling
   // const [data, setData] = useState({});
   // const getProducts = async() => {
-  //   console.log("ls",(localStorage.getItem("token")))
+  //   ("ls",(localStorage.getItem("token")))
   //   let url = `${BaseUrl()}api/v1/privacy`;
   //   try {
   //     const res = await axios.get(url, {
@@ -41,11 +41,11 @@ const PrivacyPolicy = () => {
   //         Authorization: `Bearer ${localStorage.getItem("token")}`,
   //       },
   //     });
-  //     console.log("product from shoes section",res.data.message);
+  //     ("product from shoes section",res.data.message);
   //     setData(res.data.message);
-  //     console.log("admin product data",res.data.message)
+  //     ("admin product data",res.data.message)
   //   } catch (error) {
-  //     console.log(error)
+  //     (error)
   //   }
   // }
   

@@ -81,7 +81,7 @@ const ECategory = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -99,7 +99,7 @@ const ECategory = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 

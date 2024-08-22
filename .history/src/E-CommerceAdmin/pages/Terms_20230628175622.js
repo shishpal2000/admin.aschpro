@@ -56,7 +56,7 @@ const Terms = () => {
       );
       setData(data.terms);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -79,7 +79,7 @@ const Terms = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -130,7 +130,7 @@ const Terms = () => {
       toast.success(data.message);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

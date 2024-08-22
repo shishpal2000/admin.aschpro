@@ -38,12 +38,12 @@ const Coupon = () => {
             },
           }
         );
-        console.log(data);
+        (data);
         fetchData();
         toast.success("Added");
         fetchData();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -130,11 +130,11 @@ const Coupon = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      console.log(data)
+      (data)
       fetchData()
       toast.success(` Deleted Successfully`);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

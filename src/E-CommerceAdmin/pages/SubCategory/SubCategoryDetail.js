@@ -27,7 +27,7 @@ const ESubCategory = () => {
       setData(data?.data?.history);
       
     } catch (e) {
-      console.log(e);
+     
     }
   };
 
@@ -97,7 +97,7 @@ const ESubCategory = () => {
         nofification("Mail send applicant Successfully", "success");
         props.onHide();
       } catch (e) {
-        console.log(e);
+   
       }
     };
 

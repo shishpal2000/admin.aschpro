@@ -14,7 +14,7 @@ const ViewProduct = () => {
   //api calling
   const [product, setProduct] = useState({});
   const getProducts = async () => {
-    console.log("ls", localStorage.getItem("boon"));
+   
     let url = `${BaseUrl()}api/jobs/get-job/${id}`;
     try {
       const res = await axios.get(url, {
@@ -24,7 +24,7 @@ const ViewProduct = () => {
       });
       setProduct(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

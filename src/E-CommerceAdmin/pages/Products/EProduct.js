@@ -29,7 +29,7 @@ const EProduct = () => {
 
       setProduct(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -39,7 +39,7 @@ const EProduct = () => {
 
   //delete api api/v1/product/
   const handleDelete = async (id) => {
-    console.log("ls", localStorage.getItem("token"));
+   
     let url = `${BaseUrl()}api/jobs/delete-job/${id}`;
     try {
       const res = await axios.delete(url, {
@@ -50,7 +50,7 @@ const EProduct = () => {
       getProducts();
       nofification("Jobs Deleted Successfully", "danger");
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -132,13 +132,14 @@ const EProduct = () => {
         nofification("Jobs Added Successfully", "success");
         setModalShow(false);
       } catch (error) {
-        console.log(error);
+        
       }
     };
 
     return (
       <Modal
         {...props}
+        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

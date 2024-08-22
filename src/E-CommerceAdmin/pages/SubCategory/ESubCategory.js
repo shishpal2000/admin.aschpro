@@ -24,7 +24,7 @@ const ESubCategory = () => {
       );
       setData(data?.data);
     } catch (e) {
-      console.log(e);
+     
     }
   };
 
@@ -40,7 +40,7 @@ const ESubCategory = () => {
       nofification("Application Deleted Successfully", "success");
       fetchData();
     } catch (e) {
-      console.log(e);
+  
     }
   };
 
@@ -105,7 +105,7 @@ const ESubCategory = () => {
         nofification("Mail send applicant Successfully", "success");
         props.onHide();
       } catch (e) {
-        console.log(e);
+       
       }
     };
 
@@ -173,7 +173,7 @@ const ESubCategory = () => {
       />
 
       <section>
-        <BreadCamp name="Career" />
+        <BreadCamp name="Apllicants" />
         <div
           className="pb-4   w-full flex justify-between items-center"
           style={{ width: "98%", marginLeft: "2%" }}
@@ -182,7 +182,7 @@ const ESubCategory = () => {
             className="tracking-widest text-slate-900 font-semibold uppercase"
             style={{ fontSize: "1.5rem" }}
           >
-            All Career's ( Total : {data?.length} )
+            All Apllicants ( Total : {data?.length} )
           </span>
           {/* <button
             onClick={() => {
@@ -197,7 +197,7 @@ const ESubCategory = () => {
 
         <section className="sectionCont">
           {data?.length === 0 || !data ? (
-            <Alert>Career Not Found</Alert>
+            <Alert>Apllicants Not Found</Alert>
           ) : (
             <>
               <div className="filterBox">
@@ -207,7 +207,7 @@ const ESubCategory = () => {
                 />
                 <input
                   type="search"
-                  placeholder="Search By Category Name"
+                  placeholder="Search By Apllicants Name"
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </div>

@@ -87,7 +87,7 @@ const EAdminCustomer = () => {
       );
       setData(data.users.filter((i) => i.role.includes("user")));
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -103,7 +103,7 @@ const EAdminCustomer = () => {
       toast.success(data.message);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

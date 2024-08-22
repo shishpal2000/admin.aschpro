@@ -26,9 +26,9 @@ const SellerProducts = () => {
          },
        });
        setSeller(res.data.data);
-       console.log(res.data.data, "seller");
+
      } catch (error) {
-       console.log(error)
+ 
      }
    }
 
@@ -45,7 +45,7 @@ const SellerProducts = () => {
         }
       })
     } catch (error) {
-      console.log(error)
+  
     }
   }
     

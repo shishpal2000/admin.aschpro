@@ -65,7 +65,7 @@ const ECategory = () => {
       );
       setData(data.categories);
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -81,7 +81,7 @@ const ECategory = () => {
       toast.success(data.message);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -106,7 +106,7 @@ const ECategory = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -124,7 +124,7 @@ const ECategory = () => {
         fetchData();
         props.onHide();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 

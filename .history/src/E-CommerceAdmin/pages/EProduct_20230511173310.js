@@ -75,7 +75,7 @@ const EProduct = () => {
       );
       setData(data?.stats?.ProducData.reverse());
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -108,7 +108,7 @@ const EProduct = () => {
         );
         setCategoryData(data.categories);
       } catch (e) {
-        console.log("Category Err => ", e);
+        ("Category Err => ", e);
       }
     };
     const token = localStorage.getItem("AdminToken")
@@ -137,11 +137,11 @@ const EProduct = () => {
             quantity,
           }
         );
-        console.log(data);
+        (data);
         setSuccessMessage(true);
         fetchData();
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -166,12 +166,12 @@ const EProduct = () => {
             }
           }
         );
-        console.log(data);
+        (data);
         toast.success('Product Updated Successfully')
         fetchData();
         props.onHide()
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -193,7 +193,7 @@ const EProduct = () => {
             setLoadingMessage(false);
           })
           .catch((err) => {
-            console.log(err);
+            
             setLoadingMessage(false);
           });
       });
@@ -367,7 +367,7 @@ const EProduct = () => {
         );
         setSingleProduct(data.product);
       } catch (e) {
-        console.log(e);
+        (e);
       }
     };
 
@@ -499,11 +499,11 @@ const EProduct = () => {
       const { data } = await axios.delete(
         `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:8886/api/product/${id}`
       );
-      console.log(data);
+      (data);
       fetchData();
       toast.success("Product Deleted SuccessFully");
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -521,10 +521,10 @@ const EProduct = () => {
         "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:8886/api/product/add",
         fd
       );
-      console.log(data);
+      (data);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

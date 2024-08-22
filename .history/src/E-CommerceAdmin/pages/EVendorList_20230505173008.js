@@ -56,7 +56,7 @@ const EVendorList = () => {
       );
       setData(data.users.filter((i) => i.role.includes("seller")));
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 
@@ -93,7 +93,7 @@ const EVendorList = () => {
           fetchData();
           props.onHide();
         } catch (e) {
-          console.log(e);
+          (e);
           toast.error(e.response.data.message);
         }
       } else {
@@ -180,7 +180,7 @@ const EVendorList = () => {
       toast.success(data.message);
       fetchData();
     } catch (e) {
-      console.log(e);
+      (e);
     }
   };
 

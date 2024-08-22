@@ -27,7 +27,7 @@ const Dashboard = () => {
       setCustomer(res.data.data);
   
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -44,7 +44,7 @@ const Dashboard = () => {
       setAdmin(res.data.data);
 
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
 
       setProduct(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -74,7 +74,7 @@ const Dashboard = () => {
 
       setJob(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
   const fetchDataApllication = async () => {
@@ -84,7 +84,7 @@ const Dashboard = () => {
       );
       setApllication(data?.data);
     } catch (e) {
-      console.log(e);
+    
     }
   };
 

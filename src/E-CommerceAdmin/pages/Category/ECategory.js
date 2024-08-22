@@ -33,7 +33,7 @@ const ECategory = () => {
 
       setData(res.data.data);
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -48,7 +48,7 @@ const ECategory = () => {
       getProducts();
       nofification("Blogs Deleted Successfully", "danger");
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -130,7 +130,7 @@ useEffect(() => {
           props.onHide();
         })
         .catch((err) => {
-          console.log(err);
+          
         });
     };
 
@@ -148,7 +148,7 @@ useEffect(() => {
           props.onHide();
         })
         .catch((err) => {
-          console.log(err);
+          
         });
     };
 
@@ -310,7 +310,7 @@ useEffect(() => {
                                   >
                                   <i className="fa-solid fa-eye"></i>
 
-                                    <p>View Jobs </p>
+                                    <p>View Blog</p>
                                   </div>
                                 </Menu.Item>
                                 <Menu.Item key="2">
