@@ -57,18 +57,30 @@ const ViewJobs = () => {
                 product?.title
               }</p>
 
-           
+             
+             
+              </div>
+
+              <div className="flex-job">
+              <p className="Head">short Description :</p>
+
+              <p>{
+                product?.short_desc
+              }</p>
+
+             
              
               </div>
 
               <div className="flex-job">
               <p className="Head">General Description :</p>
 
-              <p>{
+              {/* <p>{
                 product?.content
-              }</p>
+              }</p> */}
 
-           
+              <div dangerouslySetInnerHTML={{ __html: product?.content }} /> 
+
              
               </div>
 

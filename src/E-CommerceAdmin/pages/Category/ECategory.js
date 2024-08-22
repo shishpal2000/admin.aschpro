@@ -9,16 +9,14 @@ import axios from "axios";
 import BaseUrl from "../../../BaseUrl";
 import { nofification } from "../../utils/utils.js";
 import { useNavigate } from "react-router-dom";
-import { EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-
+import { Editor } from "primereact/editor";
 
 const ECategory = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState("");
   const [editData, setEditData] = useState({});
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   //api calling
   const [data, setData] = useState([]);
@@ -32,9 +30,7 @@ const ECategory = () => {
       });
 
       setData(res.data.data);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -47,9 +43,7 @@ const ECategory = () => {
       const res = await axios.delete(`${BaseUrl()}api/blogs/delete-blog/${id}`);
       getProducts();
       nofification("Blogs Deleted Successfully", "danger");
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   // Pagination and Filter
@@ -62,18 +56,22 @@ const ECategory = () => {
   let pages2 = [];
 
   const TotolData = query
-  ? data?.filter((i) =>
-      i?.title?.toLowerCase().includes(query?.toLowerCase()) ||
-      i?.content?.toLowerCase().includes(query?.toLowerCase()) ||
-      i?.createdAt?.slice(0, 10)?.toLowerCase().includes(query?.toLowerCase())
-    )
-  : data;
+    ? data?.filter(
+        (i) =>
+          i?.title?.toLowerCase().includes(query?.toLowerCase()) ||
+          i?.content?.toLowerCase().includes(query?.toLowerCase()) ||
+          i?.createdAt
+            ?.slice(0, 10)
+            ?.toLowerCase()
+            .includes(query?.toLowerCase())
+      )
+    : data;
 
-useEffect(() => {
-  if (query) {
-    setCurrentPage2(1);
-  }
-}, [query]);
+  useEffect(() => {
+    if (query) {
+      setCurrentPage2(1);
+    }
+  }, [query]);
 
   const slicedData = TotolData?.slice(firstPostIndex2, lastPostIndex2);
 
@@ -97,6 +95,7 @@ useEffect(() => {
     const [image, setImage] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
     const [id, setId] = useState("");
+    const [short_desc,setShort_desc] = useState("")
 
     useEffect(() => {
       if (edit) {
@@ -104,7 +103,10 @@ useEffect(() => {
         setTitle(editData?.title);
         setContent(editData?.content);
         setImage(editData?.blog_image);
-        setImagePreview(`https://ashpro-backend.onrender.com/${editData?.blog_image}`);
+        setShort_desc(editData?.short_desc);
+        setImagePreview(
+          `${BaseUrl()}${editData?.blog_image}`
+        );
       }
     }, [edit, editData]);
 
@@ -122,6 +124,7 @@ useEffect(() => {
       formData.append("title", title);
       formData.append("content", content);
       formData.append("blog_image", image);
+      formData.append("short_desc", short_desc);
       axios
         .post(`${BaseUrl()}api/blogs/create-blog?`, formData)
         .then((res) => {
@@ -129,9 +132,7 @@ useEffect(() => {
           nofification("Blogs Added Successfully", "success");
           props.onHide();
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     };
 
     const handleEdit = (e) => {
@@ -140,6 +141,7 @@ useEffect(() => {
       formData.append("title", title);
       formData.append("content", content);
       formData.append("blog_image", image);
+      formData.append("short_desc", short_desc);
       axios
         .put(`${BaseUrl()}api/blogs/update-blog/${id}`, formData)
         .then((res) => {
@@ -147,9 +149,7 @@ useEffect(() => {
           nofification("Blogs Updated Successfully", "success");
           props.onHide();
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     };
 
     return (
@@ -174,7 +174,6 @@ useEffect(() => {
                   type="file"
                   onChange={handleImageChange}
                   {...(edit ? {} : { required: true })}
-                  
                 />
               </Form.Group>
               {imagePreview && (
@@ -199,12 +198,28 @@ useEffect(() => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Content</Form.Label>
+              <Form.Label>Short Description</Form.Label>
+
               <Form.Control
+                value={short_desc}
+                type="text"
+                required
+                onChange={(e) => setShort_desc(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Content</Form.Label>
+              {/* <Form.Control
                 type="text"
                 value={content}
                 required
                 onChange={(e) => setContent(e.target.value)}
+              /> */}
+              <Editor
+                value={content}
+                onTextChange={(e) => setContent(e.htmlValue)}
+                style={{ height: "200px" }}
               />
             </Form.Group>
 
@@ -278,7 +293,7 @@ useEffect(() => {
                       <th>SNo.</th>
                       <th>Image</th>
                       <th>Title</th>
-                      <th>Content</th>
+                      <th>Description</th>
                       <th>CreatedAt</th>
                       <th></th>
                     </tr>
@@ -294,8 +309,9 @@ useEffect(() => {
                             style={{ width: "100px" }}
                           />
                         </td>
-                        <td>{i.title} </td>
-                        <td> {i.content}</td>
+                        <td>{i?.title} </td>
+                        <td>{i?.short_desc} </td>
+                      
 
                         <td> {i.createdAt.slice(0, 10)}</td>
 
@@ -303,12 +319,14 @@ useEffect(() => {
                           <Dropdown
                             overlay={
                               <Menu>
-                                 <Menu.Item key="1">
+                                <Menu.Item key="1">
                                   <div
                                     className="two_Sec_Div"
-                                    onClick={() => navigate(`/viewjobs/${i?._id}`)}
+                                    onClick={() =>
+                                      navigate(`/viewjobs/${i?._id}`)
+                                    }
                                   >
-                                  <i className="fa-solid fa-eye"></i>
+                                    <i className="fa-solid fa-eye"></i>
 
                                     <p>View Blog</p>
                                   </div>
