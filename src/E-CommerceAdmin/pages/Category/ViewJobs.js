@@ -44,10 +44,10 @@ const ViewJobs = () => {
         <div className="Detail_Section">
           <div className="right_Cont">
             <div className="blog-image">
-              <img src={`https://ashpro-backend.onrender.com/${product?.blog_image}`} alt="imgae not found" />
+              <img src={`${BaseUrl()}${product?.blog_image}`} alt="imgae not found" />
             </div>
             <p className="Rating">
-              {/* <span className="rat">Role : {product.role}</span>{" "} */}
+              {/* <span className="rat">Role : {product.role}</span>{" "} */}  
             </p>
 
             <div className="flex-job">

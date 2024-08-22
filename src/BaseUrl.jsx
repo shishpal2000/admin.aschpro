@@ -1,4 +1,4 @@
 
 export default function BaseUrl() {
-  return  "https://ashpro-backend.onrender.com/";
+  return  "https://api.aschpro.com/";
 }

@@ -289,7 +289,7 @@ useEffect(() => {
                         <td>#{index + 1} </td>
                         <td>
                           <img
-                            src={`https://ashpro-backend.onrender.com/${i?.blog_image}`}
+                            src={`${BaseUrl()}${i?.blog_image}`}
                             alt=""
                             style={{ width: "100px" }}
                           />
